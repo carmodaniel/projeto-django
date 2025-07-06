@@ -1,0 +1,146 @@
+{% extends 'clientes/base.html' %}
+{% block title %}Lista de Clientes{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: #f4f6fb;
+    }
+    .list-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 32px 28px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(30,40,90,0.08);
+    }
+    .list-container h2 {
+        text-align: center;
+        margin-bottom: 22px;
+        font-weight: 600;
+        color: #1976d2;
+        letter-spacing: 0.5px;
+    }
+    /* Tabela clean ajustada ao card */
+    .result-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 18px;
+        background: #fafbfc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 5px rgba(30,40,90,0.04);
+        font-size: 0.97rem;
+    }
+    .result-table th, .result-table td {
+        border-bottom: 1px solid #e0e7ef;
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: middle;
+    }
+    .result-table th {
+        background: #eaf4fb;
+        color: #1976d2;
+        font-weight: 600;
+        border-bottom: 2px solid #b6d6f6;
+    }
+    .result-table tr:last-child td {
+        border-bottom: none;
+    }
+    .result-table tr:nth-child(even) td {
+        background: #f5f7fa;
+    }
+    .result-table .ativo {
+        background: #d0f5e8;
+        color: #0a7d4f;
+        font-weight: 500;
+        border-radius: 4px;
+        padding: 3px 10px;
+        font-size: 0.97em;
+    }
+    .result-table .inativo {
+        background: #f3e9e9;
+        color: #a77;
+        font-weight: 500;
+        border-radius: 4px;
+        padding: 3px 10px;
+        font-size: 0.97em;
+    }
+    .result-table .btn {
+        padding: 5px 14px;
+        font-size: 0.97em;
+        border-radius: 5px;
+        margin-right: 4px;
+        transition: background 0.18s;
+    }
+    .result-table .btn-outline-primary {
+        color: #1976d2;
+        border: 1px solid #b6d6f6;
+        background: #eaf4fb;
+    }
+    .result-table .btn-outline-primary:hover {
+        background: #1976d2;
+        color: #fff;
+        border: 1px solid #1976d2;
+    }
+    .result-table .btn-outline-danger {
+        color: #a94442;
+        border: 1px solid #f3e9e9;
+        background: #f3e9e9;
+    }
+    .result-table .btn-outline-danger:hover {
+        background: #a94442;
+        color: #fff;
+        border: 1px solid #a94442;
+    }
+    .empty-msg {
+        margin-top: 28px;
+        text-align: center;
+        color: #888;
+        font-size: 1.07rem;
+    }
+</style>
+<div class="list-container">
+    <h2>Clientes</h2>
+    <div class="table-responsive">
+        <table class="result-table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Situação</th>
+                    <th scope="col">Data da inclusão</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.cnpj }}</td>
+                    <td>{{ cliente.estado_origem }}</td>
+                    <td>
+                        {% if cliente.situacao %}
+                            <span class="ativo">Ativo</span>
+                        {% else %}
+                            <span class="inativo">Inativo</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ cliente.data_inclusao|date:"d/m/Y" }}</td>
+                    <td>
+                        <a href="{% url 'clientes:editar' cliente.pk %}" class="btn btn-outline-primary btn-sm">Editar</a>
+                        <a href="{% url 'clientes:deletar' cliente.pk %}" class="btn btn-outline-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="empty-msg">Nenhum cliente encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

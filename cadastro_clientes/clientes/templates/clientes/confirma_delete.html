@@ -1,0 +1,17 @@
+{% extends 'clientes/base.html' %}
+{% block title %}Confirmar Exclusão{% endblock %}
+{% block content %}
+<div style="max-width:400px; margin:40px auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.07); padding:10px 24px; text-align:center;">
+    <h2 style="color:#d32f2f;">Excluir Cliente</h2>
+    <p>Tem certeza que deseja excluir o cliente:<br><strong>{{ cliente.nome }}</strong>?</p>
+    <form method="post" style="margin-top:24px;">
+        {% csrf_token %}
+        <button type="submit" style="background:#d32f2f; color:#fff; border:none; padding:10px 24px; border-radius:4px; font-weight:500; margin-right:12px; cursor:pointer;">
+            Sim, excluir
+        </button>
+        <a href="{% url 'clientes:lista' %}" style="background:#1976d2; color:#fff; border:1px solid #1976d2; padding:10px 24px; border-radius:4px; text-decoration:none; font-weight:500;">
+            Cancelar
+        </a>
+    </form>
+</div>
+{% endblock %}

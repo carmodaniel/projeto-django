@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Cadastro de Clientes{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1976d2;
+            color: #fff;
+            padding: 24px 0 16px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+        nav {
+            margin-bottom: 8px;
+        }
+        nav a {
+            color: #fff;
+            background: #1565c0;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 4px;
+            margin: 0 4px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        nav a:hover {
+            background: #0d47a1;
+        }
+        main {
+            max-width: 900px;
+            margin: 32px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 32px 24px;
+        }
+        @media (max-width: 600px) {
+            main {
+                padding: 16px 4px;
+            }
+            header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cadastro de Clientes</h1>
+        <nav>
+            <a href="{% url 'clientes:lista' %}">Clientes</a>
+            <a href="{% url 'clientes:criar' %}">Novo Cliente</a>
+            <a href="{% url 'clientes:buscar' %}">Buscar</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
