@@ -1,0 +1,106 @@
+{% extends "clientes/base.html" %}
+{% block content %}
+<style>
+    body {
+        background: #f4f6fb;
+    }
+    .form-container {
+        max-width: 460px;
+        margin: 40px auto;
+        padding: 32px 28px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(30,40,90,0.08);
+    }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 22px;
+        font-weight: 600;
+        color: #1976d2;
+        letter-spacing: 0.5px;
+    }
+    .form-container form label {
+        font-weight: 500;
+        margin-top: 12px;
+        color: #333;
+    }
+    .form-container form input, 
+    .form-container form select {
+        width: 100%;
+        padding: 10px 12px;
+        margin: 8px 0 18px 0;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        box-sizing: border-box;
+        background: #f9fafb;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+    }
+    .form-container form input:focus,
+    .form-container form select:focus {
+        border-color: #1976d2;
+        outline: none;
+        background: #fff;
+    }
+    .form-container button, .form-container a {
+        display: inline-block;
+        padding: 9px 22px;
+        margin-top: 6px;
+        border: none;
+        border-radius: 6px;
+        background: #1976d2;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        font-size: 1rem;
+        transition: background 0.18s, box-shadow 0.18s;
+        box-shadow: 0 1px 3px rgba(25,118,210,0.04);
+    }
+    .form-container a {
+        background: #e0e7ef;
+        color: #1976d2;
+        margin-left: 8px;
+        border: 1px solid #d1d5db;
+    }
+    .form-container button:hover {
+        background: #125ea2;
+    }
+    .form-container a:hover {
+        background: #c7d5e8;
+        color: #125ea2;
+    }
+    .user-info {
+        text-align: center;
+        margin-bottom: 24px;
+        padding: 16px;
+        background: #eaf4fb;
+        border-radius: 8px;
+        color: #1976d2;
+        font-weight: 500;
+    }
+</style>
+<div class="form-container">
+    <h2>Resetar Senha</h2>
+    <div class="user-info">
+        Usuário: <strong>{{ usuario.username }}</strong>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <label for="{{ field.id_for_label }}" style="font-weight: 500; color: #1976d2;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #888; font-size: 0.93em;">{{ field.help_text|safe }}</small>
+                {% endif %}
+                {% if field.errors %}
+                    <div style="color: #d32f2f; font-size: 0.97em; margin-top: 2px; white-space: pre-line;">{{ field.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit">Salvar Nova Senha</button>
+        <a href="{% url 'usuarios:gerenciar' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %} 
