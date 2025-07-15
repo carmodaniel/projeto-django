@@ -1,88 +1,75 @@
 # Cadastro de Clientes
 
-Este projeto é uma aplicação Django desenvolvida para gerenciar o cadastro de clientes, com possibilidade futura de expansão para contratos e serviços. O sistema foi criado para fins didáticos no curso Coderhouse.
+Este projeto é uma aplicação Django moderna para gerenciar o cadastro de clientes e usuários, com layout responsivo, visual agradável e experiência de uso aprimorada.
 
-## Funcionalidades Atuais
+## Principais Funcionalidades
 
-- Cadastro de clientes com validação de CNPJ único
-- Listagem de clientes em tabela estilizada
-- Busca de clientes por nome ou CNPJ
-- Edição e exclusão de clientes
-- Interface amigável e responsiva
+- Cadastro, listagem, busca, edição e exclusão de clientes
+- Gerenciamento de usuários (admin pode bloquear, desbloquear, resetar senha e excluir usuários)
+- Cadastro e login de usuários com validação avançada de senha e nome de usuário
+- Upload e exibição de foto de perfil do usuário (ou avatar com inicial)
+- Proteção de rotas: apenas usuários autenticados podem acessar funcionalidades de clientes
+- Layout responsivo, minimalista e moderno, adaptado para desktop e mobile
+- Cabeçalho fixo com menu centralizado e avatar do usuário à direita
+- Paleta de cores profissional e acessível
 
-## Estrutura do Projeto
+## Paleta de Cores
 
-- `clientes/` — Aplicação principal, contém:
-  - `models.py`: Modelos de Cliente, Contrato e Serviço (estes dois últimos para expansão futura)
-  - `views.py`: Funções de listagem, criação, edição, exclusão e busca de clientes (e esqueleto para contratos/serviços)
-  - `forms.py`: Formulários Django para validação dos dados
-  - `templates/clientes/`: Templates HTML para as páginas do sistema
-- `db.sqlite3` — Banco de dados SQLite padrão
-- `requirements.txt` — Dependências do projeto
+- **Azul Escuro:** #1A237E (cabeçalho, botões principais)
+- **Azul Claro:** #42A5F5 (destaques, links, ícones)
+- **Branco:** #FFFFFF (fundo principal, textos)
+- **Cinza Claro:** #F5F7FA (fundo de cards, tabelas)
+- **Cinza Médio:** #B0BEC5 (bordas, divisores)
+- **Verde Suave:** #66BB6A (status "Ativo", confirmações)
+- **Vermelho Suave:** #EF9A9A (status "Inativo", alertas)
+
+## Layout e Experiência
+
+- **Cabeçalho fixo:** com logo, nome do sistema, menu centralizado e avatar do usuário à direita
+- **Cards arredondados:** com sombra suave para agrupar informações (ex: formulários, tabelas)
+- **Menu responsivo:** centralizado, quebra para coluna em telas pequenas, nunca ultrapassa a largura da página
+- **Avatar do usuário:** exibe foto de perfil ou inicial, sempre visível e alinhado à direita
+- **Botões de ação:** largos, com texto centralizado, cores intuitivas e sem quebra de linha
+- **Tipografia moderna:** Inter, Roboto ou Montserrat
+- **Animações suaves:** para feedback de ações
 
 ## Instalação e Execução
 
 1. Clone o repositório:
-
    ```bash
    git clone <url-do-repositorio>
    ```
-
 2. Instale as dependências:
-
    ```bash
    pip install -r requirements.txt
    ```
-
 3. Acesse a pasta do projeto e aplique as migrações:
-
    ```bash
    cd cadastro_clientes
    python manage.py migrate
    ```
-
 4. Inicie o servidor:
-
    ```bash
    python manage.py runserver
    ```
-
 5. Acesse `http://127.0.0.1:8000/` no navegador.
 
-## Explicação do Código Python/Django
+## Estrutura do Projeto
 
-### Views (views.py)
-
-- **Clientes**
-  - `lista_clientes`: Lista todos os clientes cadastrados.
-  - `cria_cliente`: Permite cadastrar um novo cliente. Valida se o CNPJ já existe e exibe mensagem de erro se necessário.
-  - `atualiza_cliente`: Permite editar os dados de um cliente existente.
-  - `deleta_cliente`: Exclui um cliente após confirmação.
-  - `busca_cliente`: Permite buscar clientes por nome ou CNPJ, exibindo resultados em tabela. Se não encontrar, mostra mensagem adequada.
-
-- **Contratos e Serviços**
-  - As views para contratos e serviços (`lista_contratos`, `cria_contrato`, `atualiza_contrato`, `deleta_contrato`, `lista_servicos`, `cria_servico`, etc.) já estão estruturadas, mas a lógica de negócio e os templates podem ser expandidos conforme a necessidade futura.
-
-### Models (models.py)
-
-- `Cliente`: Armazena informações como nome, CNPJ, estado, situação, data de cadastro, etc. O campo CNPJ é validado para ser único.
-- `Contrato` e `Servico`: Modelos preparados para futura implementação de cadastro, edição e exclusão.
-
-### Forms (forms.py)
-
-- `ClienteForm`: Formulário para cadastro/edição de clientes, com validação de CNPJ único.
-- `BuscaClienteForm`: Formulário para busca de clientes por nome ou CNPJ.
-- `ContratoForm` e `ServicoForm`: Formulários para futuras funcionalidades.
-
-### Templates (templates/clientes/)
-
-- Páginas HTML para cadastro, listagem, busca, edição e exclusão de clientes, com layout responsivo e mensagens de erro amigáveis.
+- `clientes/` — Funcionalidades de clientes (CRUD, busca, templates)
+- `usuarios/` — Cadastro, login, perfil, gerenciamento e templates de usuários
+- `static/style.css` — CSS global com paleta, responsividade e layout moderno
+- `templates/` — HTMLs minimalistas, responsivos e com visual profissional
 
 ## Observações
 
-- O projeto utiliza Django 5+.
-- Para customizações, edite os arquivos em `clientes/`.
-- As funcionalidades de contratos e serviços podem ser expandidas facilmente, pois a estrutura já está preparada.
+- O projeto utiliza Django 5+
+- Todas as rotas de clientes exigem autenticação
+- O layout é totalmente responsivo e acessível
+- O avatar do usuário é exibido no cabeçalho após login
+- O menu é centralizado e adaptável a qualquer tela
 
 ---
+
+Sinta-se à vontade para customizar o visual, adicionar novas funcionalidades ou integrar com outros sistemas!
 

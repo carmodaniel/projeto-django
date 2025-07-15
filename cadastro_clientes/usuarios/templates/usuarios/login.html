@@ -1,0 +1,33 @@
+{% extends "clientes/base.html" %}
+{% block content %}
+<h2 style="text-align:center; font-weight:600; margin-bottom:24px; color:#1976d2;">Login</h2>
+<div style="max-width: 370px; margin: 0 auto; background: #f9fbfd; border-radius: 10px; box-shadow: 0 1px 8px rgba(30,40,90,0.07); padding: 32px 24px;">
+    {% if messages %}
+      <ul style="list-style:none; padding:0; margin-bottom:12px;">
+        {% for message in messages %}
+          <li style="color:#d32f2f; background:#fbe9e7; border-radius:4px; padding:8px 12px; margin-bottom:4px;">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <form method="post" style="display: flex; flex-direction: column; gap: 18px;">
+        {% csrf_token %}
+        {% for field in form %}
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <label for="{{ field.id_for_label }}" style="font-weight: 500; color: #1976d2;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #888; font-size: 0.93em;">{{ field.help_text|safe }}</small>
+                {% endif %}
+                {% if field.errors %}
+                    <div style="color: #d32f2f; font-size: 0.97em; margin-top: 2px; white-space: pre-line;">{{ field.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" style="background: #1976d2; color: #fff; border: none; border-radius: 6px; padding: 10px 0; font-size: 1.08em; font-weight: 600; cursor: pointer; transition: background 0.2s;">Entrar</button>
+    </form>
+    <div style="text-align:center; margin-top:18px;">
+        <span style="font-size:0.98em; margin-right:8px;">Não tem conta?</span>
+        <a href="{% url 'usuarios:cadastro' %}" style="display:inline-block; background:#fff; color:#1976d2; border:1.5px solid #1976d2; border-radius:6px; padding:7px 22px; font-size:1em; font-weight:600; text-decoration:none; transition:background 0.2s, color 0.2s; cursor:pointer;">Cadastre-se</a>
+    </div>
+</div>
+{% endblock %}
