@@ -1,7 +1,22 @@
 from django import forms
 from .models import Cliente, Contrato, Servico
 
+ESTADOS_BR = [
+    ('', 'Selecione o estado'),
+    *[(uf, uf) for uf in [
+        'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG',
+        'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+    ]]
+]
+
 class ClienteForm(forms.ModelForm):
+    estado_origem = forms.ChoiceField(
+        choices=ESTADOS_BR,
+        label='Estado de Origem',
+        required=True,
+        widget=forms.Select(attrs={'style': 'color:#374151;'}),
+        error_messages={'required': 'Selecione o estado de origem.'}
+    )
     class Meta:
         model = Cliente
         fields = ['nome', 'cnpj', 'estado_origem', 'situacao']
@@ -17,6 +32,12 @@ class ClienteForm(forms.ModelForm):
             raise forms.ValidationError("Cliente com este CNPJ já existe")
         return cnpj
 
+    def clean_estado_origem(self):
+        estado = self.cleaned_data.get('estado_origem')
+        if not estado:
+            raise forms.ValidationError('Selecione o estado de origem.')
+        return estado
+
 class ContratoForm(forms.ModelForm):
     class Meta:
         model = Contrato
@@ -28,6 +49,4 @@ class ServicoForm(forms.ModelForm):
         fields = ['cliente', 'tipo']
 
 class BuscaClienteForm(forms.Form):
-    #nome = forms.CharField(max_length=100, required=False)
-    #cnpj = forms.CharField(max_length=14, required=False)
     termo = forms.CharField(label='Nome ou CNPJ', required=False)

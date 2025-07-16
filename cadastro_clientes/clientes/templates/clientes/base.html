@@ -13,7 +13,8 @@
             <span style="font-size:1.7em;">&#128100;</span>
             <span>Cadastro de Clientes</span>
         </div>
-        <nav class="main-nav">
+        <nav class="main-nav" style="margin: 0 auto; position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 16px; top: 50%; transform: translateY(-50%); z-index: 2;">
+            <a href="#" id="btnSobreMim" onclick="document.getElementById('sobreModal').style.display='block'; return false;">Sobre Mim</a>
             <a href="{% url 'clientes:lista' %}">Clientes</a>
             <a href="{% url 'clientes:criar' %}">Novo Cliente</a>
             <a href="{% url 'clientes:buscar' %}">Buscar</a>
@@ -44,6 +45,65 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    <!-- Modal Sobre Mim -->
+    <div id="sobreModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; overflow:auto; background:rgba(26,35,126,0.18);">
+      <div style="background:#fff; margin:48px auto; padding:36px 36px; border-radius:14px; max-width:650px; width:96vw; box-shadow:0 2px 16px rgba(30,40,90,0.13); position:relative; animation:fadeIn 0.3s; font-size:1.11em; line-height:1.7;">
+        <button onclick="document.getElementById('sobreModal').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.7em; color:#1976d2; cursor:pointer;">&times;</button>
+        <h3 style="color:#1976d2; font-weight:700; margin-bottom:16px; font-size:1.32em;">Sobre Mim</h3>
+        <p style="margin-bottom:22px; font-size:1.09em; color:#222;">Olá! Sou <b>Daniel Eduardo do Carmo</b>, atualmente trabalho como Analista de Sistemas e estudante eterno de tecnologia, e este é o meu projeto de cadastro de clientes desenvolvido com Django. O objetivo principal deste sistema é proporcionar uma solução moderna, responsiva e intuitiva para gerenciamento de clientes e usuários, unindo praticidade e experiência de uso aprimorada.</p>
+        <h4 style="color:#1976d2; font-size:1.16em; margin:22px 0 10px 0;">Sobre o Projeto</h4>
+        <ul style="margin:0 0 24px 26px; color:#222; font-size:1em; padding-left:0.9em;">
+          <li style="margin-bottom:12px;"><b>Nome:</b> Cadastro de Clientes – Projeto Django Coderhouse</li>
+          <li style="margin-bottom:12px;"><b>Propósito:</b> Permitir o cadastro, busca, edição e exclusão de clientes, além de oferecer gerenciamento completo de usuários, incluindo autenticação, permissões e upload de foto de perfil.</li>
+        </ul>
+        <b>Diferenciais:</b>
+        <ul style="margin:0 0 24px 26px; color:#222; font-size:1em; padding-left:0.9em;">
+          <li style="margin-bottom:12px;">Layout totalmente responsivo e acessível, adaptado para desktop e dispositivos móveis.</li>
+          <li style="margin-bottom:12px;">Navegação simples, com menu centralizado e avatar do usuário sempre visível.</li>
+          <li style="margin-bottom:12px;">Validação avançada de senha e nome de usuário para maior segurança.</li>
+          <li style="margin-bottom:12px;">Experiência visual moderna com paleta de cores profissional e animações suaves.</li>
+        </ul>
+        <b>Tecnologias Utilizadas</b>
+        <ul style="margin:0 0 24px 26px; color:#222; font-size:1em; padding-left:0.9em;">
+          <li style="margin-bottom:12px;"><b>Backend:</b> Django 5+ e Python 3.13</li>
+          <li style="margin-bottom:12px;"><b>Frontend:</b> HTML, CSS (customizado e responsivo)</li>
+          <li style="margin-bottom:12px;"><b>Recursos extras:</b> Upload de foto/Avatar, autenticação de usuários, proteção de rotas, interface limpa e objetiva.</li>
+        </ul>
+        <b>Motivação</b>
+        <p style="margin-bottom:24px; font-size:1em; color:#222;">Desenvolvi este projeto como parte do curso de Python na Coderhouse, com o objetivo de consolidar conceitos de back-end, front-end e boas práticas de usabilidade. Busquei criar um sistema funcional, bonito e fácil de manter, aprendendo com os desafios do desenvolvimento web moderno.</p>
+        <b>Saiba Mais</b>
+        <p style="margin-bottom:0; font-size:1em; color:#222;">O código-fonte está disponível no meu GitHub <a href="https://github.com/carmodaniel/projeto-django" target="_blank" style="color:#1976d2; text-decoration:underline;">https://github.com/carmodaniel/projeto-django</a>, onde você encontra instruções para instalação, recursos e sugestões de personalização.<br>Se quiser conversar sobre tecnologia, desenvolvimento ou contribuir com ideias para o projeto, fique à vontade para entrar em contato!</p>
+        <style>
+          @media (max-width: 900px) {
+            #sobreModal > div {
+              max-width: 98vw !important;
+              padding: 18px 4vw !important;
+              font-size: 1em !important;
+            }
+          }
+          @media (max-width: 600px) {
+            #sobreModal > div {
+              padding: 10px 2vw !important;
+              font-size: 0.97em !important;
+            }
+            #sobreModal h3, #sobreModal h4 {
+              font-size: 1.05em !important;
+            }
+            #sobreModal ul, #sobreModal p {
+              font-size: 0.97em !important;
+            }
+          }
+        </style>
+      </div>
+    </div>
+    <script>
+      window.onclick = function(event) {
+        var modal = document.getElementById('sobreModal');
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>
