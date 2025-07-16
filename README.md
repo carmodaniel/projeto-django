@@ -10,8 +10,10 @@ Este projeto é uma aplicação Django moderna para gerenciar o cadastro de clie
 - Upload e exibição de foto de perfil do usuário (ou avatar com inicial)
 - Proteção de rotas: apenas usuários autenticados podem acessar funcionalidades de clientes
 - Layout responsivo, minimalista e moderno, adaptado para desktop e mobile
-- Cabeçalho fixo com menu centralizado e avatar do usuário à direita
+- Cabeçalho fixo com menu centralizado (independente do logo) e avatar do usuário à direita
+- Modal "Sobre Mim" acessível no menu principal, com conteúdo responsivo e leitura agradável
 - Paleta de cores profissional e acessível
+- Botões de ação compactos, lado a lado, com visual limpo
 
 ## Paleta de Cores
 
@@ -25,11 +27,12 @@ Este projeto é uma aplicação Django moderna para gerenciar o cadastro de clie
 
 ## Layout e Experiência
 
-- **Cabeçalho fixo:** com logo, nome do sistema, menu centralizado e avatar do usuário à direita
+- **Cabeçalho fixo:** com logo, nome do sistema, menu centralizado (não depende do tamanho do logo) e avatar do usuário à direita
 - **Cards arredondados:** com sombra suave para agrupar informações (ex: formulários, tabelas)
 - **Menu responsivo:** centralizado, quebra para coluna em telas pequenas, nunca ultrapassa a largura da página
 - **Avatar do usuário:** exibe foto de perfil ou inicial, sempre visível e alinhado à direita
-- **Botões de ação:** largos, com texto centralizado, cores intuitivas e sem quebra de linha
+- **Botões de ação:** compactos, lado a lado, cores intuitivas e sem quebra de linha
+- **Modal "Sobre Mim":** mais largo, leitura fácil, responsivo e sem barra de rolagem na maioria dos casos
 - **Tipografia moderna:** Inter, Roboto ou Montserrat
 - **Animações suaves:** para feedback de ações
 
@@ -68,6 +71,8 @@ Este projeto é uma aplicação Django moderna para gerenciar o cadastro de clie
 - O layout é totalmente responsivo e acessível
 - O avatar do usuário é exibido no cabeçalho após login
 - O menu é centralizado e adaptável a qualquer tela
+- O modal "Sobre Mim" está disponível em todas as páginas, com leitura confortável
+- Dependências atualizadas no requirements.txt
 
 ---
 
