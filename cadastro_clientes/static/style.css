@@ -353,6 +353,27 @@ tr:nth-child(even) td {
   background: #ffcdd2 !important;
   color: #b71c1c !important;
 }
+.actions-row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+}
+.actions-row a {
+  min-width: 48px !important;
+  padding: 4px 8px !important;
+  font-size: 0.93em !important;
+  border-radius: 6px !important;
+  display: inline-block !important;
+  text-align: center !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
 @media (max-width: 900px) {
   main {
     max-width: 100vw;
@@ -396,6 +417,35 @@ tr:nth-child(even) td {
     flex-direction: column;
     align-items: stretch;
     padding-right: 0;
+  }
+  .btn, .card-actions a, .actions-row a, .main-nav a, .result-table a {
+    min-width: 90px;
+    font-size: 0.97em;
+    padding: 8px 8px;
+  }
+  .actions-row {
+    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .actions-row {
+    flex-direction: row !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+  }
+  .actions-row a {
+    min-width: 54px !important;
+    padding: 5px 6px !important;
+    font-size: 0.95em !important;
+  }
+  .actions-row {
+    gap: 5px !important;
+    flex-wrap: wrap !important;
+  }
+  .actions-row a {
+    min-width: 40px !important;
+    padding: 3px 5px !important;
+    font-size: 0.91em !important;
   }
 }
 @media (max-width: 700px) {
@@ -455,6 +505,21 @@ tr:nth-child(even) td {
     min-width: 90px;
     font-size: 0.97em;
     padding: 8px 8px;
+  }
+  .actions-row {
+    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .actions-row {
+    flex-direction: row !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+  }
+  .actions-row a {
+    min-width: 54px !important;
+    padding: 5px 6px !important;
+    font-size: 0.95em !important;
   }
 }
 @media (max-width: 500px) {
