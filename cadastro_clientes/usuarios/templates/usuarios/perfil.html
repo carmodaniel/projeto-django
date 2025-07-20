@@ -1,13 +1,62 @@
 {% extends "clientes/base.html" %}
 {% block content %}
-<h2>Editar Perfil</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
-{% if profile.image %}
-    <h4>Pré-visualização:</h4>
-    <img src="{{ profile.image.url }}" alt="Imagem de perfil" style="max-width:120px; border-radius:50%; margin-top:10px;">
-{% endif %}
+<h2 style="text-align:center; font-weight:600; margin-bottom:24px; color:#1976d2;">Editar Perfil</h2>
+<div style="max-width: 500px; margin: 0 auto; background: #f9fbfd; border-radius: 10px; box-shadow: 0 1px 8px rgba(30,40,90,0.07); padding: 32px 24px;">
+    <form method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 18px;">
+        {% csrf_token %}
+        
+        <!-- Nome de Usuário (somente leitura) -->
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+            <label for="{{ form.username.id_for_label }}" style="font-weight: 500; color: #1976d2;">{{ form.username.label }}</label>
+            <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" value="{{ form.username.value|default:'' }}" disabled style="width: 100%; padding: 10px 12px; margin: 8px 0 18px 0; border: 1px solid #B0BEC5; border-radius: 6px; background: #f0f0f0; font-size: 1rem; font-family: 'Inter', 'Roboto', 'Montserrat', Arial, sans-serif; color: #666; box-sizing: border-box;">
+        </div>
+        
+        <!-- E-mail (editável) -->
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+            <label for="{{ form.email.id_for_label }}" style="font-weight: 500; color: #1976d2;">{{ form.email.label }}</label>
+            <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" value="{{ form.email.value|default:'' }}" style="width: 100%; padding: 10px 12px; margin: 8px 0 18px 0; border: 1px solid #B0BEC5; border-radius: 6px; background: #F5F7FA; font-size: 1rem; font-family: 'Inter', 'Roboto', 'Montserrat', Arial, sans-serif; transition: border-color 0.2s; box-sizing: border-box;">
+            {% if form.email.errors %}
+                <div style="color: #d32f2f; font-size: 0.97em; margin-top: 2px; white-space: pre-line;">{{ form.email.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        
+        <!-- Foto de Perfil -->
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+            <label for="{{ form.image.id_for_label }}" style="font-weight: 500; color: #1976d2;">{{ form.image.label }}</label>
+            <input type="file" name="{{ form.image.name }}" id="{{ form.image.id_for_label }}" accept="image/*" style="width: 100%; padding: 10px 12px; margin: 8px 0 18px 0; border: 1px solid #B0BEC5; border-radius: 6px; background: #F5F7FA; font-size: 1rem; font-family: 'Inter', 'Roboto', 'Montserrat', Arial, sans-serif; transition: border-color 0.2s; box-sizing: border-box;">
+            {% if form.image.help_text %}
+                <small style="color: #888; font-size: 0.93em;">{{ form.image.help_text|safe }}</small>
+            {% endif %}
+            {% if form.image.errors %}
+                <div style="color: #d32f2f; font-size: 0.97em; margin-top: 2px; white-space: pre-line;">{{ form.image.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        
+        <button type="submit" style="background: #1976d2; color: #fff; border: none; border-radius: 6px; padding: 10px 0; font-size: 1.08em; font-weight: 600; cursor: pointer; transition: background 0.2s;">Salvar Alterações</button>
+    </form>
+    
+    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e0e0e0;">
+        {% if profile.image %}
+            <h4 style="color: #1976d2; margin-bottom: 12px;">Foto Atual:</h4>
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                <img src="{{ profile.image.url }}" alt="Foto de perfil atual" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #1976d2;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <span style="color: #666; font-size: 0.9em;">Foto carregada com sucesso</span>
+                    <a href="{% url 'usuarios:excluir_foto' %}" onclick="return confirm('Tem certeza que deseja excluir sua foto de perfil?')" style="background: #d32f2f; color: #fff; border: none; border-radius: 4px; padding: 6px 12px; font-size: 0.9em; text-decoration: none; display: inline-block; cursor: pointer;">Excluir Foto</a>
+                </div>
+            </div>
+        {% else %}
+            <h4 style="color: #1976d2; margin-bottom: 12px;">Foto de Perfil:</h4>
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: #4CAF50; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 1.5em; border: 3px solid #1976d2;">
+                    {{ user.username|first|upper }}
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <span style="color: #666; font-size: 0.9em;">Nenhuma foto carregada</span>
+                    <span style="color: #1976d2; font-size: 0.9em; font-weight: 500;">Selecione uma foto acima para personalizar seu perfil</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %} 

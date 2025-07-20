@@ -10,3 +10,7 @@ urlpatterns = [
     path('deletar/<int:pk>/', views.deleta_cliente, name='deletar'),
     path('buscar/', views.busca_cliente, name='buscar'),
 ]
+
+urlpatterns += [
+    path('leia-mais/', views.leia_mais, name='leia_mais'),
+]

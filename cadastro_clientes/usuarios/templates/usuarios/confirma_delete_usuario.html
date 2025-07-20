@@ -1,0 +1,68 @@
+{% extends 'clientes/base.html' %}
+{% block title %}Confirmar Exclusão de Usuário{% endblock %}
+{% block content %}
+<style>
+    .form-container {
+        max-width: 460px;
+        margin: 40px auto;
+        padding: 32px 28px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(30,40,90,0.08);
+        text-align: center;
+    }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 22px;
+        font-weight: 600;
+        color: #d32f2f;
+        letter-spacing: 0.5px;
+    }
+    .form-container p {
+        color: #333;
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+    .form-container strong {
+        color: #1976d2;
+        font-weight: 600;
+        font-size: 1.15em;
+    }
+    .form-container button, .form-container a {
+        display: inline-block;
+        padding: 12px 32px;
+        margin: 0 8px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 1.08em;
+        transition: background 0.18s, box-shadow 0.18s;
+        box-shadow: 0 1px 3px rgba(211,47,47,0.04);
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .form-container button {
+        background: #d32f2f;
+        color: #fff;
+    }
+    .form-container a {
+        background: #1976d2;
+        color: #fff;
+    }
+    .form-container button:hover {
+        background: #b71c1c;
+    }
+    .form-container a:hover {
+        background: #125ea2;
+    }
+</style>
+<div class="form-container">
+    <h2>Excluir Usuário</h2>
+    <p>Tem certeza que deseja excluir o usuário:<br><strong>{{ usuario.username }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+        <a href="{% url 'usuarios:gerenciar' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %} 

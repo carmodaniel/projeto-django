@@ -253,17 +253,16 @@ tr:nth-child(even) td {
   color: var(--branco);
 }
 .main-nav {
-  flex: 1 1 auto;
+  background: var(--azul-escuro) !important;
+  width: 100%;
+  border-radius: 0;
+  padding: 6px 0;
+  margin: 0;
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  min-width: 0;
-  overflow-x: auto;
-  max-width: 100vw;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  padding: 8px 0;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(26,35,126,0.08);
 }
 .user-avatar {
   flex: 0 0 auto;
@@ -485,6 +484,8 @@ tr:nth-child(even) td {
     width: 100%;
     max-width: 100vw;
     padding: 8px 0;
+    padding: 4px 6px;
+    border-radius: 8px;
   }
   .main-nav a {
     width: 90vw;

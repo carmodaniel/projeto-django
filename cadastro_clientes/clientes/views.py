@@ -57,6 +57,9 @@ def busca_cliente(request):
             clientes = []
     return render(request, 'clientes/busca_cliente.html', {'form': form, 'clientes': clientes, 'buscou': buscou})
 
+def leia_mais(request):
+    return render(request, 'clientes/leia_mais.html')
+
 def lista_contratos(request):
     contratos = Contrato.objects.all()
     return render(request, 'clientes/lista_contratos.html', {'contratos': contratos})

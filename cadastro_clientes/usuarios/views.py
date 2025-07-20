@@ -51,11 +51,31 @@ def perfil_view(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
+            # Salva a imagem de perfil
             form.save()
-            messages.success(request, "Imagem de perfil atualizada!")
+            # Atualiza o email do usuário
+            user = request.user
+            user.email = form.cleaned_data['email']
+            user.save()
+            messages.success(request, "Perfil atualizado com sucesso!")
+            return redirect('usuarios:perfil')
     else:
-        form = ProfileForm(instance=profile)
+        form = ProfileForm(instance=profile, initial={
+            'username': request.user.username,
+            'email': request.user.email
+        })
     return render(request, "usuarios/perfil.html", {"form": form, "profile": profile})
+
+@login_required
+def excluir_foto_view(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    if profile.image:
+        # Remove o arquivo físico se existir
+        profile.image.delete(save=False)
+        profile.image = None
+        profile.save()
+        messages.success(request, "Foto de perfil excluída com sucesso!")
+    return redirect('usuarios:perfil')
 
 @user_passes_test(lambda u: u.is_superuser)
 def deletar_usuario(request, user_id):
