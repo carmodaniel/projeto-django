@@ -91,9 +91,20 @@ class CustomAuthenticationForm(AuthenticationForm):
     password = forms.CharField(label="Senha", widget=forms.PasswordInput)
 
 class ProfileForm(forms.ModelForm):
+    username = forms.CharField(label='Nome de Usuário', disabled=True, required=False)
+    email = forms.EmailField(label='E-mail', required=True)
+    
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['image']   
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].label = 'Foto de Perfil'
+        self.fields['image'].help_text = 'Selecione uma imagem para seu perfil (opcional)'
+        self.fields['image'].required = False
+        # Remove o campo Clear do widget
+        if self.fields['image'].widget:
+            self.fields['image'].widget.clear_checkbox_label = None
 
 class CustomSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
